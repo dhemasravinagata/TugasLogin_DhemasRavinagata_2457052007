@@ -2,13 +2,11 @@
 session_start();
 require 'koneksi.php';
 
-// Pastikan admin login
 if (!isset($_SESSION['nama']) || $_SESSION['nama'] !== 'admin1') {
     header("Location: dashboard.php");
     exit();
 }
 
-// Pastikan ada parameter id
 if (!isset($_GET['id'])) {
     header("Location: dashboard.php");
     exit();
@@ -16,7 +14,6 @@ if (!isset($_GET['id'])) {
 
 $id = intval($_GET['id']);
 
-// Ambil data user dari database
 $stmt = $conn->prepare("SELECT nama FROM users WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
@@ -28,7 +25,6 @@ if (!$stmt->fetch()) {
 }
 $stmt->close();
 
-// Proses update
 if (isset($_POST['update'])) {
     $nama_baru = trim($_POST['nama']);
     $password_baru = $_POST['password'];
