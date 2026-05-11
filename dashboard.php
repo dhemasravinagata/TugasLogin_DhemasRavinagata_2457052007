@@ -2,7 +2,6 @@
 session_start();
 require 'koneksi.php';
 
-// Pastikan sudah login
 if (!isset($_SESSION['nama'])) {
     header("Location: auth.php");
     exit();
@@ -10,7 +9,6 @@ if (!isset($_SESSION['nama'])) {
 
 $nama_user = $_SESSION['nama'];
 
-// Proses delete user
 if (isset($_GET['delete']) && $nama_user === 'admin1') {
     $id_delete = intval($_GET['delete']);
     $conn->query("DELETE FROM users WHERE id = $id_delete");
