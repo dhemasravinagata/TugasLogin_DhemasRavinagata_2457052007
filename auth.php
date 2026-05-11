@@ -13,7 +13,6 @@ if (isset($_POST['register'])) {
     } elseif (strlen($password) < 6) {
         $pesan = "Password minimal 6 karakter.";
     } else {
-        // Cek nama pengguna sudah ada
         $stmt = $conn->prepare("SELECT id FROM users WHERE nama = ?");
         $stmt->bind_param("s", $nama);
         $stmt->execute();
